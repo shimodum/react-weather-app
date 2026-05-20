@@ -36,3 +36,30 @@
   color: #d33;
   font-weight: bold;
 }
+
+.history {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.history h2 {
+  font-size: 18px;
+  text-align: center;
+}
+
+.history ul {
+  padding: 0;
+  list-style: none;
+}
+
+.history li {
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #f8fafc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.history li:hover {
+  background: #e9eef5;
+}

@@ -6,11 +6,13 @@ import {
 } from './api/weatherApi';
 import WeatherCard from './components/WeatherCard';
 import './App.css';
+import HistoryList from './components/HistoryList';
 
 function App() {
   const [weather, setWeather] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [histories, setHistories] = useState([]);
 
   async function handleSearch(city) {
     try {
@@ -20,6 +22,7 @@ function App() {
       const weatherData = await fetchWeatherByCity(city);
 
       setWeather(weatherData);
+      addHistory(weatherData.name);
     } catch (error) {
       setWeather(null);
       setErrorMessage(error.message);
@@ -41,6 +44,7 @@ function App() {
           );
 
           setWeather(weatherData);
+          addHistory(weatherData.name);
         } catch (error) {
           setWeather(null);
           setErrorMessage(error.message);
@@ -52,6 +56,16 @@ function App() {
         setErrorMessage('位置情報取得が許可されませんでした');
       }
     );
+  }
+
+  function addHistory(cityName) {
+    setHistories((prevHistories) => {
+      const newHistories = prevHistories.filter(
+        (history) => history !== cityName
+      );
+
+      return [cityName, ...newHistories].slice(0, 5);
+    });
   }
 
   return (
@@ -75,6 +89,8 @@ function App() {
       {weather && (
         <WeatherCard weather={weather} />
       )}
+
+      <HistoryList histories={histories} onSelectHistory={handleSearch} />
     </div>
   );
 }
