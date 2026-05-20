@@ -60,7 +60,10 @@ function App() {
 
       <SearchForm onSearch={handleSearch} />
 
-      <button onClick={handleCurrentLocation}>
+      <button
+        className="location-button"
+        onClick={handleCurrentLocation}
+      >
         現在地の天気を取得
       </button>
 

@@ -11,7 +11,7 @@
 .search-form {
   display: flex;
   gap: 8px;
-  margin: 24px 0;
+  margin: 24px 0 12px;
 }
 
 .search-form input {
@@ -20,10 +20,31 @@
   font-size: 16px;
 }
 
-.search-form button {
+.search-form button,
+.location-button {
   padding: 12px 16px;
   font-size: 16px;
   cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+.search-form button {
+  background: #e5e7eb;
+}
+
+.search-form button:hover {
+  background: #d1d5db;
+}
+
+.location-button {
+  width: 100%;
+  margin-bottom: 20px;
+  background: #e0f2fe;
+}
+
+.location-button:hover {
+  background: #bae6fd;
 }
 
 .weather-card {
@@ -78,4 +99,19 @@
 
 .snowy {
   background: #f8fafc;
+}
+
+@media (max-width: 480px) {
+  .app {
+    margin: 40px auto;
+    padding: 16px;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-form button {
+    width: 100%;
+  }
 }
