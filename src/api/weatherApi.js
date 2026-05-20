@@ -36,7 +36,12 @@ function normalizeCityName(cityName) {
     '札幌': 'Sapporo',
     '京都': 'Kyoto',
     '名古屋': 'Nagoya',
-    '福岡': 'Fukuoka'
+    '福岡': 'Fukuoka',
+    '岡山': 'Okayama',
+    '広島': 'Hiroshima',
+    '仙台': 'Sendai',
+    '横浜': 'Yokohama',
+    '神戸': 'Kobe',
   };
 
   return cityMap[cityName] || cityName;

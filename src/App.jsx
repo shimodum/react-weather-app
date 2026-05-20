@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
 import SearchForm from './components/SearchForm';
 import WeatherCard from './components/WeatherCard';
 import HistoryList from './components/HistoryList';
 import { useWeather } from './hooks/useWeather';
+import { useHistory } from './hooks/useHistory';
 import './App.css';
 
 function App() {
@@ -14,21 +14,10 @@ function App() {
     getCurrentWeather,
   } = useWeather();
 
-  const [histories, setHistories] = useState(() => {
-    const savedHistories =
-      localStorage.getItem('weatherHistories');
-
-    return savedHistories
-      ? JSON.parse(savedHistories)
-      : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem(
-      'weatherHistories',
-      JSON.stringify(histories)
-    );
-  }, [histories]);
+  const {
+    histories,
+    addHistory,
+  } = useHistory();
 
   async function handleSearch(city) {
     const weatherData = await searchWeather(city);
@@ -39,21 +28,7 @@ function App() {
   }
 
   async function handleCurrentLocation() {
-    const weatherData = await getCurrentWeather();
-
-    if (weatherData) {
-      addHistory(weatherData.name);
-    }
-  }
-
-  function addHistory(cityName) {
-    setHistories((prevHistories) => {
-      const newHistories = prevHistories.filter(
-        (history) => history !== cityName
-      );
-
-      return [cityName, ...newHistories].slice(0, 5);
-    });
+    await getCurrentWeather();
   }
 
   function getWeatherClass(weatherMain) {
