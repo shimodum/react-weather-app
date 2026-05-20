@@ -63,3 +63,19 @@
 .history li:hover {
   background: #e9eef5;
 }
+
+.sunny {
+  background: #dbeafe;
+}
+
+.cloudy {
+  background: #cbd5e1;
+}
+
+.rainy {
+  background: #bfdbfe;
+}
+
+.snowy {
+  background: #f8fafc;
+}
