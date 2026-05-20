@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchForm from './components/SearchForm';
 import {
   fetchWeatherByCity,
@@ -12,7 +12,19 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [histories, setHistories] = useState([]);
+  const [histories, setHistories] = useState(() => {
+    const savedHistories = localStorage.getItem('weatherHistories');
+
+    return savedHistories
+      ? JSON.parse(savedHistories)
+      : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem(
+      'weatherHistories', JSON.stringify(histories)
+    );
+  }, [histories]);
 
   async function handleSearch(city) {
     try {
