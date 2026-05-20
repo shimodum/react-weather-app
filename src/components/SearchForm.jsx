@@ -17,7 +17,7 @@ function SearchForm({ onSearch }) {
     <form onSubmit={handleSubmit} className="search-form">
       <input
         type="text"
-        placeholder="都市名を入力 例：Tokyo"
+        placeholder="都市名を入力（例：東京、Tokyo）"
         value={city}
         onChange={(event) =>
           setCity(event.target.value)
