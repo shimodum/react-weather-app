@@ -58,13 +58,19 @@ function App() {
     <div className={`app ${weatherClass}`}>
       <h1>天気予報アプリ</h1>
 
-      <SearchForm onSearch={handleSearch} />
+      <SearchForm
+        onSearch={handleSearch}
+        isLoading={isLoading}
+      />
 
       <button
         className="location-button"
         onClick={handleCurrentLocation}
+        disabled={isLoading}
       >
-        現在地の天気を取得
+        {isLoading
+          ? '取得中...'
+          : '現在地の天気を取得'}
       </button>
 
       {isLoading && (
