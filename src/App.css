@@ -1,5 +1,6 @@
 .app {
-  width: min(90%, 480px);
+  width: 90%;
+  max-width: 480px;
   margin: 80px auto;
   padding: 24px;
   background: #fff;
@@ -24,6 +25,12 @@
   flex: 1;
   padding: 12px;
   font-size: 16px;
+  border: 1px solid #999;
+  outline: none;
+}
+
+.search-form input:focus {
+  border: 1px solid #333;
 }
 
 .search-form button,
@@ -57,6 +64,17 @@
   padding: 16px;
   border-radius: 12px;
   background: #f8fafc;
+}
+
+.weather-card h2 {
+  font-size: 24px;
+  margin: 0 0 16px;
+}
+
+.weather-card p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 8px 0;
 }
 
 .error {
@@ -93,10 +111,19 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  color: #333;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .history li:hover {
   background: #e9eef5;
+}
+
+.history li:focus,
+.history li:active,
+.history li:focus-visible {
+  background: #f8fafc;
+  outline: none;
 }
 
 .sunny {
