@@ -12,6 +12,7 @@ function App() {
     isLoading,
     searchWeather,
     getCurrentWeather,
+    setErrorMessage,
   } = useWeather();
 
   const {
@@ -20,6 +21,11 @@ function App() {
   } = useHistory();
 
   async function handleSearch(city) {
+    if (!city.trim()) {
+      setErrorMessage('都市名を入力してください。');
+      return;
+    }
+
     const weatherData = await searchWeather(city);
 
     if (weatherData) {
@@ -78,7 +84,9 @@ function App() {
       )}
 
       {errorMessage && (
-        <p className="error">{errorMessage}</p>
+        <div className="weather-card">
+          <p className="error">{errorMessage}</p>
+        </div>
       )}
 
       {weather && (

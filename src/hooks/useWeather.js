@@ -109,7 +109,8 @@ export function useWeather() {
     errorMessage,
     isLoading,
     searchWeather,
-    getCurrentWeather
+    getCurrentWeather,
+    setErrorMessage,
   };
 
 }

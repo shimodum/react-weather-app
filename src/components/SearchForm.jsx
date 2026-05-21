@@ -9,10 +9,6 @@ function SearchForm({
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (!city.trim()) {
-      return;
-    }
-
     onSearch(city);
   }
 
@@ -39,7 +35,6 @@ function SearchForm({
           ? '検索中...'
           : '検索'}
       </button>
-
     </form>
   );
 }
