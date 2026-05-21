@@ -1,11 +1,9 @@
-import { useState } from 'react';
-
 function SearchForm({
+  city,
+  setCity,
   onSearch,
   isLoading
 }) {
-  const [city, setCity] = useState('');
-
   function handleSubmit(event) {
     event.preventDefault();
 

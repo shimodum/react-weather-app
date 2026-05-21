@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import SearchForm from './components/SearchForm';
 import WeatherCard from './components/WeatherCard';
 import HistoryList from './components/HistoryList';
@@ -6,6 +7,8 @@ import { useHistory } from './hooks/useHistory';
 import './App.css';
 
 function App() {
+  const [city, setCity] = useState('');
+
   const {
     weather,
     errorMessage,
@@ -20,16 +23,17 @@ function App() {
     addHistory,
   } = useHistory();
 
-  async function handleSearch(city) {
-    if (!city.trim()) {
+  async function handleSearch(cityName) {
+    if (!cityName.trim()) {
       setErrorMessage('都市名を入力してください。');
       return;
     }
 
-    const weatherData = await searchWeather(city);
+    const weatherData = await searchWeather(cityName);
 
     if (weatherData) {
       addHistory(weatherData.name);
+      setCity(weatherData.name);
     }
   }
 
@@ -65,6 +69,8 @@ function App() {
       <h1>天気予報アプリ</h1>
 
       <SearchForm
+        city={city}
+        setCity={setCity}
         onSearch={handleSearch}
         isLoading={isLoading}
       />
