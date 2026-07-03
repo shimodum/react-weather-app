@@ -17,7 +17,7 @@ function SearchForm({
     >
       <input
         type="text"
-        placeholder="都市名を入力（例：東京、Tokyo）"
+        placeholder="都市名または都道府県名を入力"
         value={city}
         disabled={isLoading}
         onChange={(event) =>
