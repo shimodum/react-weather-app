@@ -1,5 +1,7 @@
-function WeatherCard({ weather }) {
-
+function WeatherCard({
+  weather,
+  children
+}) {
   const icon =
     weather.weather[0].icon;
 
@@ -7,10 +9,10 @@ function WeatherCard({ weather }) {
     `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
   return (
-
     <div className="weather-card">
-
       <h2>{weather.name}</h2>
+
+      {children}
 
       <img
         src={iconUrl}
@@ -36,9 +38,7 @@ function WeatherCard({ weather }) {
         風速：
         {weather.wind.speed} m/s
       </p>
-
     </div>
-
   );
 }
 

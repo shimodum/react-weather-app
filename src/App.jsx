@@ -1,21 +1,28 @@
 import { useState } from 'react';
 import SearchForm from './components/SearchForm';
 import WeatherCard from './components/WeatherCard';
+import FavoriteButton from './components/FavoriteButton';
+import ForecastList from './components/ForecastList';
+import FavoriteList from './components/FavoriteList';
 import HistoryList from './components/HistoryList';
 import { useWeather } from './hooks/useWeather';
 import { useHistory } from './hooks/useHistory';
+import { useFavorites } from './hooks/useFavorites';
 import './App.css';
 
 function App() {
   const [city, setCity] = useState('');
+  const [isLocationSearch, setIsLocationSearch] =
+    useState(false);
 
   const {
     weather,
+    forecast,
     errorMessage,
     isLoading,
     searchWeather,
     getCurrentWeather,
-    setErrorMessage,
+    clearWeather,
   } = useWeather();
 
   const {
@@ -23,11 +30,21 @@ function App() {
     addHistory,
   } = useHistory();
 
+  const {
+    favorites,
+    toggleFavorite,
+    isFavorite,
+  } = useFavorites();
+
   async function handleSearch(cityName) {
     if (!cityName.trim()) {
-      setErrorMessage('都市名を入力してください。');
+      clearWeather(
+        '都市名・都道府県名・郵便番号を入力してください。'
+      );
       return;
     }
+
+    setIsLocationSearch(false);
 
     const weatherData = await searchWeather(cityName);
 
@@ -38,6 +55,9 @@ function App() {
   }
 
   async function handleCurrentLocation() {
+    setIsLocationSearch(true);
+    setCity('');
+
     await getCurrentWeather();
   }
 
@@ -96,8 +116,23 @@ function App() {
       )}
 
       {weather && (
-        <WeatherCard weather={weather} />
+        <WeatherCard weather={weather}>
+          {!isLocationSearch && (
+            <FavoriteButton
+              cityName={weather.name}
+              isFavorite={isFavorite(weather.name)}
+              onToggleFavorite={toggleFavorite}
+            />
+          )}
+        </WeatherCard>
       )}
+
+      <ForecastList forecast={forecast} />
+
+      <FavoriteList
+        favorites={favorites}
+        onSelectFavorite={handleSearch}
+      />
 
       <HistoryList
         histories={histories}

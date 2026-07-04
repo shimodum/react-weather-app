@@ -17,7 +17,7 @@ function SearchForm({
     >
       <input
         type="text"
-        placeholder="都市名または都道府県名を入力"
+        placeholder="都市名・都道府県名・郵便番号を入力"
         value={city}
         disabled={isLoading}
         onChange={(event) =>
